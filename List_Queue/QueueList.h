@@ -10,13 +10,13 @@ struct Node
 };
 
 template <typename T>
-class List
+class QueueList
 {
 	Node<T>* Head, * Tail;
 	int Count;
 
 public:
-	List();
+	QueueList();
 	void Del();				//Deletes the first element in the queue
 	void DelAll();			//Deletes all queue
 	void AddTail(T);		//Adds a new element in the queue
@@ -27,11 +27,11 @@ public:
 	bool IsEmpty()const;	//Checks if the queue is empty
 	T GetFirst()const;		//Returns first element in the queue
 	
-	List<T>& operator=(const List<T> &oldList) {
+	QueueList<T>& operator=(const  QueueList<T> &oldList) {
 		if (this == &oldList)			
 			return *this;
 
-		this->~List<T>();				//Deleting current List data.
+		this->~QueueList<T>();				//Deleting current List data.
 
 		Node<T>* temp = oldList.Head;	//Creating temp that saves oldList.Head pointer
 		while (temp!=0)					//While there are elemets in oldList
@@ -42,18 +42,18 @@ public:
 
 		return *this;
 	}
-	~List();
+	~QueueList();
 };
 
 template<typename T>
-List<T>::List() {
+QueueList<T>::QueueList() {
 	Head = Tail = NULL;
 	Count = 0;
 }
 
 
 template<typename T>
-void List<T>::Del()
+void  QueueList<T>::Del()
 {
 	if (GetCount() == 1) Head = Tail = 0; Count = 0;//If there is only one node left, will just delete node completely.
 	if (Head == NULL)return;					//If head pointer is NULL, returns.
@@ -67,7 +67,7 @@ void List<T>::Del()
 
 
 template<typename T>
-void List<T>::DelAll()
+void  QueueList<T>::DelAll()
 {
 	while (Count!= 0)
 	{
@@ -76,7 +76,7 @@ void List<T>::DelAll()
 }
 
 template<typename T>
-void List<T>::AddTail(T data)
+void  QueueList<T>::AddTail(T data)
 {
 	Node<T>* temp = new Node<T>;				
 
@@ -96,7 +96,7 @@ void List<T>::AddTail(T data)
 }
 
 template<typename T>
-void List<T>::Random()
+void  QueueList<T>::Random()
 {
 	Node<T>* temp = Head;
 
@@ -107,7 +107,7 @@ void List<T>::Random()
 }
 
 template<typename T>
-void List<T>::Fill(int numbers)
+void  QueueList<T>::Fill(int numbers)
 {
 	for (int i = 0; i < numbers; i++)
 	{
@@ -116,7 +116,7 @@ void List<T>::Fill(int numbers)
 }
 
 template<typename T>
-void List<T>::Print()const
+void  QueueList<T>::Print()const
 {
 	Node<T>* temp = Head;
 	while (temp != 0)
@@ -129,28 +129,25 @@ void List<T>::Print()const
 }
 
 template<typename T>
-int List<T>::GetCount() const
+int  QueueList<T>::GetCount() const
 {
 	return Count;
 }
 
 template<typename T>
-bool List<T>::IsEmpty() const
+bool  QueueList<T>::IsEmpty() const
 {
 	if (GetCount() == 0) return 1;
 	else return 0;
 }
 
 template<typename T>
-T List<T>::GetFirst() const
+T QueueList<T>::GetFirst() const
 {
 	return Head->data;
 }
 
-
-
-
 template<typename T>
-List<T>::~List() {
+QueueList<T>::~QueueList() {
 	DelAll();
 }
